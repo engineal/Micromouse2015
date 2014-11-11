@@ -1,0 +1,12 @@
+/nbproject
+*.o
+*.lst
+*.d
+*.eep
+*.elf
+*.hex
+*.lss
+*.map
+*.sym
+*.d
+*.d
