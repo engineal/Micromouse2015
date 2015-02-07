@@ -8,16 +8,6 @@
 #ifndef MAZE_H
 #define	MAZE_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
 
 #endif	/* MAZE_H */
 
