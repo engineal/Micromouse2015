@@ -1,5 +1,5 @@
 /* 
- * File:   main.c
+ * File:   main.cpp
  * Author: Aaron Lucia
  *
  * Created on November 11, 2014, 11:11 AM
@@ -13,5 +13,4 @@
  */
 int main(int argc, char** argv) {
 
-    return (EXIT_SUCCESS);
 }
