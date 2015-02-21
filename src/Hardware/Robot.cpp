@@ -7,23 +7,30 @@
  */
 
 #include <avr/io.h>
+#include "Robot.h"
 
 namespace Hardware {
+
     class Robot {
+
         void initilize() {
             //Set digital pins for left and right motor to output
-            DDRD |= (1 << Motor::motorL) | (1 << Motor::motorR);
-            
+            DDRD |= (1 << motorL) | (1 << motorR);
+
             //Set analog pins to input
             DDRC = 0;
         }
-        
-        void setPort() {
-            PORTD |= 0b10101000;
+
+        void setPort(Motor motor, bool value) {
+            if (value) {
+                PORTD |= (1 << motor);
+            } else {
+                PORTD &= ~(1 << motor);
+            }
         }
-        
-        int readSensor (Sensor sensor) {
-            
+
+        int readSensor(Sensor sensor) {
+
         }
     };
 }

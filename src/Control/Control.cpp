@@ -4,18 +4,19 @@
  *
  * Created on February 7, 2015, 10:51 AM
  */
-#include "Hardware/Robot.h";
+#include "../Hardware/Robot.h"
 
 namespace Control {
     class Control {
-        Robot robot;
+        Robot* robot;
         
         Control() {
             robot = new Robot();
         }
         
         void moveForward() {
-            robot.setPort();
+            robot->setPort(motorL, true);
+            robot->setPort(motorR, true);
         }
     };
 }

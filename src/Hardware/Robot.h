@@ -29,7 +29,7 @@ enum Motor {
 class Robot {
 public:
     void initilize();
-    void setPort();
+    void setPort(Motor motor, bool value);
     int readSensor(Sensor sensor);
 };
 
