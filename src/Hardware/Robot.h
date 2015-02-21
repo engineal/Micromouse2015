@@ -8,6 +8,30 @@
 #ifndef ROBOT_H
 #define	ROBOT_H
 
+enum Sensor {
+    frontL = 0,
+    frontR = 1,
+    leftF = 2,
+    rightF = 3,
+    leftB = 4,
+    rightB = 5,
+    backL = 6,
+    backR = 7,
+    encodeL = 8,
+    encodeR = 9
+};
+
+enum Motor {
+    motorL = 1,
+    motorR = 2
+};
+
+class Robot {
+public:
+    void initilize();
+    void setPort();
+    int readSensor(Sensor sensor);
+};
 
 #endif	/* ROBOT_H */
 

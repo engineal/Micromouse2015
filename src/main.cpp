@@ -7,10 +7,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Control/Control.h"
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-
+    Control control = new Control();
+    control.moveForward();
 }

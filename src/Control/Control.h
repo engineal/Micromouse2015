@@ -8,6 +8,11 @@
 #ifndef CONTROL_H
 #define	CONTROL_H
 
+class Control {
+public:
+    Control();
+    void moveForward();
+};
 
 #endif	/* CONTROL_H */
 

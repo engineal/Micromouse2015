@@ -8,6 +8,9 @@
 #ifndef FLOODFILL_H
 #define	FLOODFILL_H
 
+class FloodFill {
+    
+};
 
 #endif	/* FLOODFILL_H */
 
