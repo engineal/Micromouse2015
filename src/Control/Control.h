@@ -8,7 +8,11 @@
 #ifndef CONTROL_H
 #define	CONTROL_H
 
+#include "../Hardware/Robot.h"
+
 class Control {
+private:
+	Robot* robot;
 public:
     Control();
     void moveForward();

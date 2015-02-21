@@ -6,31 +6,25 @@
  * Defines and controls hardware elements of the robot
  */
 
-#include <avr/io.h>
 #include "Robot.h"
+#include <avr/io.h>
 
-namespace Hardware {
+void Robot::initilize() {
+	//Set digital pins for left and right motor to output
+	DDRD |= (1 << motorL) | (1 << motorR);
 
-    class Robot {
+	//Set analog pins to input
+	DDRC = 0;
+}
 
-        void initilize() {
-            //Set digital pins for left and right motor to output
-            DDRD |= (1 << motorL) | (1 << motorR);
+void Robot::setPort(Motor motor, bool value) {
+	if (value) {
+		PORTD |= (1 << motor);
+	} else {
+		PORTD &= ~(1 << motor);
+	}
+}
 
-            //Set analog pins to input
-            DDRC = 0;
-        }
-
-        void setPort(Motor motor, bool value) {
-            if (value) {
-                PORTD |= (1 << motor);
-            } else {
-                PORTD &= ~(1 << motor);
-            }
-        }
-
-        int readSensor(Sensor sensor) {
-
-        }
-    };
+int Robot::readSensor(Sensor sensor) {
+	return 0;
 }
