@@ -11,7 +11,8 @@ Control::Control() {
 	robot = new Robot();
 }
 
+
 void Control::moveForward() {
-	robot->setPort(motorL, true);
-	robot->setPort(motorR, true);
+	robot->writeMotor(motorL, true);
+	robot->writeMotor(motorR, true);
 }
