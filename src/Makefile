@@ -85,10 +85,13 @@ SRC = $(TARGET).c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC = main.cpp
+CPPSRC += Position.cpp
+
 CPPSRC += Algorithm/Floodfill.cpp
 CPPSRC += Control/Control.cpp
 CPPSRC += Hardware/Robot.cpp
 CPPSRC += Memory/Maze.cpp
+CPPSRC += Memory/Cell.cpp
 
 
 # List Assembler source files here.

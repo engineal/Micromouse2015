@@ -9,6 +9,7 @@
 
 Control::Control() {
 	robot = new Robot();
+	maze = new Maze();
 }
 
 

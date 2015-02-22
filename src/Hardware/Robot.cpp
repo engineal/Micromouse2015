@@ -9,6 +9,10 @@
 #include "Robot.h"
 #include <avr/io.h>
 
+Robot::Robot() {
+	position = new Position(0, 0);
+}
+
 void Robot::initilize() {
 	//Set digital pins for left and right motor to output
 	DDRD |= (1 << motorL) | (1 << motorR);

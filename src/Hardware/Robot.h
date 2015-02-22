@@ -8,6 +8,8 @@
 #ifndef ROBOT_H
 #define	ROBOT_H
 
+#include "../Position.h"
+
 enum Sensor {
     frontL = 0,
     frontR = 1,
@@ -27,9 +29,12 @@ enum Motor {
 };
 
 class Robot {
+private:
+	Position* position;
 public:
+	Robot();
     void initilize();
-    void setPort(Motor motor, bool value);
+    void writeMotor(Motor motor, bool value);
     int readSensor(Sensor sensor);
 };
 

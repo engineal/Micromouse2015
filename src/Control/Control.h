@@ -9,10 +9,12 @@
 #define	CONTROL_H
 
 #include "../Hardware/Robot.h"
+#include "../Memory/Maze.h"
 
 class Control {
 private:
 	Robot* robot;
+	Maze* maze;
 public:
     Control();
     void moveForward();
