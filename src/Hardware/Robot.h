@@ -24,8 +24,8 @@ enum Sensor {
 };
 
 enum Motor {
-    motorL = 1,
-    motorR = 2
+    motorL = 9,
+    motorR = 10
 };
 
 class Robot {
@@ -34,7 +34,8 @@ private:
 public:
 	Robot();
     void initilize();
-    void writeMotor(Motor motor, bool value);
+    void straight(int speed, bool direction);
+    void stop();
     int readSensor(Sensor sensor);
 };
 

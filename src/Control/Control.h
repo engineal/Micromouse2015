@@ -17,8 +17,6 @@ private:
 	Maze* maze;
 public:
     Control();
-    void moveForward();
 };
 
 #endif	/* CONTROL_H */
-

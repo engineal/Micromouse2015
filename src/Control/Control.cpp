@@ -11,9 +11,3 @@ Control::Control() {
 	robot = new Robot();
 	maze = new Maze();
 }
-
-
-void Control::moveForward() {
-	robot->writeMotor(motorL, true);
-	robot->writeMotor(motorR, true);
-}

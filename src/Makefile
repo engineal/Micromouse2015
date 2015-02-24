@@ -90,6 +90,7 @@ CPPSRC += Position.cpp
 CPPSRC += Algorithm/Floodfill.cpp
 CPPSRC += Control/Control.cpp
 CPPSRC += Hardware/Robot.cpp
+CPPSRC += Hardware/io.cpp
 CPPSRC += Memory/Maze.cpp
 CPPSRC += Memory/Cell.cpp
 

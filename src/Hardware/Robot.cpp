@@ -7,6 +7,7 @@
  */
 
 #include "Robot.h"
+#include "io.h"
 #include <avr/io.h>
 
 Robot::Robot() {
@@ -15,7 +16,8 @@ Robot::Robot() {
 
 void Robot::initilize() {
 	//Set digital pins for left and right motor to output
-	DDRD |= (1 << motorL) | (1 << motorR);
+	pinMode(motorL, OUTPUT);
+	pinMode(motorR, OUTPUT);
 
 	//Set analog pins to input
 	DDRC = 0;
@@ -34,12 +36,14 @@ void Robot::initilize() {
 	DDRE |= (1 << PORTE6);
 }
 
-void Robot::writeMotor(Motor motor, bool value) {
-	if (value) {
-		PORTD |= (1 << motor);
-	} else {
-		PORTD &= ~(1 << motor);
-	}
+void Robot::straight(int speed, bool direction) {
+	digitalWrite(motorL, true);
+	digitalWrite(motorR, true);
+}
+
+void Robot::stop() {
+	digitalWrite(motorL, false);
+	digitalWrite(motorR, false);
 }
 
 int Robot::readSensor(Sensor sensor) {
