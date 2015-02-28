@@ -24,4 +24,5 @@ void operator delete(void * ptr)
  */
 int main(int argc, char** argv) {
     Control* control = new Control();
+	control->go();
 }

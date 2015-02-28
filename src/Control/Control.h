@@ -17,6 +17,7 @@ private:
 	Maze* maze;
 public:
     Control();
+	void go();
 };
 
 #endif	/* CONTROL_H */
