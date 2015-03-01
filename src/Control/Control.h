@@ -8,6 +8,7 @@
 #ifndef CONTROL_H
 #define	CONTROL_H
 
+#include "../Algorithm/Algorithm.h"
 #include "../Hardware/Robot.h"
 #include "../Memory/Maze.h"
 
@@ -16,8 +17,8 @@ private:
 	Robot* robot;
 	Maze* maze;
 public:
-    Control();
-	void go();
+    Control(Maze* maze);
+	void go(Algorithm* algorithm);
 };
 
 #endif	/* CONTROL_H */

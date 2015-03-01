@@ -23,6 +23,7 @@ void operator delete(void * ptr)
  * 
  */
 int main(int argc, char** argv) {
-    Control* control = new Control();
-	control->go();
+	Maze* maze = new Maze();
+    Control* control = new Control(maze);
+	control->go(new Algorithm(maze));
 }

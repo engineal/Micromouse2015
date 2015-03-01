@@ -8,12 +8,7 @@
 #ifndef CELL_H
 #define	CELL_H
 
-enum Wall {
-	northWall,
-	southWall,
-	eastWall,
-	westWall
-};
+#include "../Position.h"
 
 class Cell {
 private:
@@ -22,8 +17,9 @@ private:
 	bool east;
 	bool west;
 public:
-    bool getWall(Wall wall);
-	void setWall(Wall wall);
+	Cell(bool north, bool south, bool east, bool west);
+    bool getWall(Direction wall);
+	void setWall(Direction wall);
 };
 
 #endif	/* CELL_H */

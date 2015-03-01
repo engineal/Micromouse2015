@@ -7,33 +7,40 @@
  
 #include "Cell.h"
 
-bool Cell::getWall(Wall wall) {
+Cell::Cell(bool north, bool south, bool east, bool west) {
+	this->north = north;
+	this->south = south;
+	this->east = east;
+	this->west = west;
+}
+
+bool Cell::getWall(Direction wall) {
 	switch (wall) {
-	case northWall:
+	case NORTH:
 		return north;
-	case southWall:
+	case SOUTH:
 		return south;
-	case eastWall:
+	case EAST:
 		return east;
-	case westWall:
+	case WEST:
 		return west;
 	default:
 		return false;
 	}
 }
 
-void Cell::setWall(Wall wall) {
+void Cell::setWall(Direction wall) {
 	switch (wall) {
-	case northWall:
+	case NORTH:
 		north = true;
 		break;
-	case southWall:
+	case SOUTH:
 		south = true;
 		break;
-	case eastWall:
+	case EAST:
 		east = true;
 		break;
-	case westWall:
+	case WEST:
 		west = true;
 		break;
 	}

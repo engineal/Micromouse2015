@@ -8,9 +8,12 @@
 #ifndef FLOODFILL_H
 #define	FLOODFILL_H
 
-class FloodFill {
-    
+#include "../Position.h"
+#include "Algorithm.h"
+
+class FloodFill : public Algorithm {
+public:
+	Direction nextMove(Position* position);
 };
 
 #endif	/* FLOODFILL_H */
-

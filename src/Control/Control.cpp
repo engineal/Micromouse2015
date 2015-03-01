@@ -8,14 +8,17 @@
 #include "Control.h"
 #include <util/delay.h>
 
-Control::Control() {
+Control::Control(Maze* maze) {
 	robot = new Robot();
-	maze = new Maze();
+	this->maze = maze;
 }
 
-void Control::go() {
-	robot->straight(100, true);
-	// Wait 1 second
-	_delay_ms(1000);
+void Control::go(Algorithm* algorithm) {
+	while (true) {
+		robot->moveCell(algorithm->nextMove(robot->getPosition()));
+		maze->setCell(robot->getPosition(), robot->getCell());
+		// Wait 1 second
+		_delay_ms(1000);
+	}
 	robot->stop();
 }

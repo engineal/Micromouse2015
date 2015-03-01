@@ -9,24 +9,7 @@
 #define	ROBOT_H
 
 #include "../Position.h"
-
-enum Sensor {
-    frontL = 0,
-    frontR = 1,
-    leftF = 2,
-    rightF = 3,
-    leftB = 4,
-    rightB = 5,
-    backL = 6,
-    backR = 7,
-    encodeL = 8,
-    encodeR = 9
-};
-
-enum Motor {
-    motorL = 9,
-    motorR = 10
-};
+#include "../Memory/Cell.h"
 
 class Robot {
 private:
@@ -34,10 +17,10 @@ private:
 public:
 	Robot();
     void initilize();
-    void straight(int speed, bool direction);
+	Position* getPosition();
+    void moveCell(Direction facing);
     void stop();
-    int readSensor(Sensor sensor);
+	Cell* getCell();
 };
 
 #endif	/* ROBOT_H */
-

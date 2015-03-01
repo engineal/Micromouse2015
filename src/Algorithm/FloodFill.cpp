@@ -6,3 +6,7 @@
  */
 
 #include "FloodFill.h"
+
+Direction FloodFill::nextMove(Position* position) {
+	return position->getFacing();
+}

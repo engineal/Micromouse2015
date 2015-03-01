@@ -88,6 +88,7 @@ CPPSRC = main.cpp
 CPPSRC += Position.cpp
 
 CPPSRC += Algorithm/Floodfill.cpp
+CPPSRC += Algorithm/Algorithm.cpp
 CPPSRC += Control/Control.cpp
 CPPSRC += Hardware/Robot.cpp
 CPPSRC += Hardware/io.cpp

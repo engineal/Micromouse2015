@@ -13,10 +13,12 @@
 
 class Maze {
 private:
-	Cell* cells[16][16];
+	bool nsWalls[16][15];
+	bool ewWalls[15][16];
 public:
 	Maze();
-    Cell* getCell(Position position);
+    Cell* getCell(Position* position);
+    void setCell(Position* position, Cell* cell);
 };
 
 #endif	/* MAZE_H */
