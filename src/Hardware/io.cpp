@@ -20,7 +20,19 @@ void analogWrite(int pin, int value) {
 }
 
 int analogRead(int pin) {
-	return -1;
+   //Select ADC Channel ch must be 0-7
+   int ch = pin & 0b00000111;
+   ADMUX = (1 << REFS0) | ch;
+   
+   //Start Single conversion
+   ADCSRA |= (1<<ADSC);
+
+   //Wait for conversion to complete
+   while(!(ADCSRA & (1<<ADIF)));
+
+   ADCSRA |= (1<<ADIF);
+
+   return(ADC);
 }
 
 void digitalWrite(int pin, bool value){

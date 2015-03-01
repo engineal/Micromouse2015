@@ -13,6 +13,24 @@ enum Mode {
 	OUTPUT
 };
 
+enum Sensor {
+    frontL = 0,
+    frontR = 1,
+    leftF = 2,
+    rightF = 3,
+    leftB = 4,
+    rightB = 5,
+    backL = 6,
+    backR = 7,
+    encodeL = 8,
+    encodeR = 9
+};
+
+enum Motor {
+    motorL = 9,
+    motorR = 10
+};
+
 void pinMode(int pin, Mode mode);
 
 void analogWrite(int pin, int value);
