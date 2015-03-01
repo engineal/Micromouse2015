@@ -13,6 +13,10 @@ Control::Control(Maze* maze) {
 	this->maze = maze;
 }
 
+Control::~Control() {
+	delete robot;
+}
+
 void Control::go(Algorithm* algorithm) {
 	while (true) {
 		robot->moveCell(algorithm->nextMove(robot->getPosition()));

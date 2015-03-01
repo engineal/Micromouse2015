@@ -17,8 +17,8 @@ private:
 	bool ewWalls[15][16];
 public:
 	Maze();
-    Cell* getCell(Position* position);
-    void setCell(Position* position, Cell* cell);
+    Cell getCell(Position* position);
+    void setCell(Position* position, Cell cell);
 };
 
 #endif	/* MAZE_H */

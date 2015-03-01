@@ -17,7 +17,7 @@ Maze::Maze() {
 			ewWalls[x][y] = false;
 }
 
-Cell* Maze::getCell(Position* position) {
+Cell Maze::getCell(Position* position) {
 	bool north;
 	if (position->getY() == 0)
 		north = true;
@@ -38,16 +38,16 @@ Cell* Maze::getCell(Position* position) {
 		west = true;
 	else
 		west = ewWalls[position->getX() - 1][position->getY()];
-	return new Cell(north, south, east, west);
+	return Cell(north, south, east, west);
 }
 
-void Maze::setCell(Position* position, Cell* cell) {
+void Maze::setCell(Position* position, Cell cell) {
 	if (position->getY() > 0)
-		nsWalls[position->getX()][position->getY() - 1] = cell->getWall(NORTH);
+		nsWalls[position->getX()][position->getY() - 1] = cell.getWall(NORTH);
 	if (position->getY() < 15)
-		nsWalls[position->getX()][position->getY()] = cell->getWall(SOUTH);
+		nsWalls[position->getX()][position->getY()] = cell.getWall(SOUTH);
 	if (position->getX() < 15)
-		ewWalls[position->getX()][position->getY()] = cell->getWall(EAST);
+		ewWalls[position->getX()][position->getY()] = cell.getWall(EAST);
 	if (position->getX() > 0)
-		ewWalls[position->getX() - 1][position->getY()] = cell->getWall(WEST);
+		ewWalls[position->getX() - 1][position->getY()] = cell.getWall(WEST);
 }

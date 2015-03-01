@@ -12,14 +12,14 @@ Algorithm::Algorithm(Maze* maze) {
 }
 
 Direction Algorithm::nextMove(Position* position) {
-	Cell* cell = maze->getCell(position);
+	Cell cell = maze->getCell(position);
 	
-	if (cell->getWall(position->getFacing())) {
+	if (cell.getWall(position->getFacing())) {
 		Direction facing = leftOf(position->getFacing());
-		if (!cell->getWall(facing))
+		if (!cell.getWall(facing))
 			return facing;
 		facing = rightOf(position->getFacing());
-		if (!cell->getWall(facing))
+		if (!cell.getWall(facing))
 			return facing;
 		return rightOf(facing);
 	} else {

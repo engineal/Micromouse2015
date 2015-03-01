@@ -13,6 +13,10 @@ Robot::Robot() {
 	position = new Position(0, 0, EAST);
 }
 
+Robot::~Robot() {
+	delete position;
+}
+
 void Robot::initilize() {
 	//Set digital pins for left and right motor to output
 	pinMode(motorL, OUTPUT);
@@ -50,10 +54,10 @@ void Robot::stop() {
 	digitalWrite(motorR, false);
 }
 
-Cell* Robot::getCell() {
+Cell Robot::getCell() {
 	bool north = true;
 	bool south = true;
 	bool east = false;
 	bool west = true;
-	return new Cell(north, south, east, west);
+	return Cell(north, south, east, west);
 }

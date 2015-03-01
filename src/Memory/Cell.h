@@ -19,7 +19,6 @@ private:
 public:
 	Cell(bool north, bool south, bool east, bool west);
     bool getWall(Direction wall);
-	void setWall(Direction wall);
 };
 
 #endif	/* CELL_H */

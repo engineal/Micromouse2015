@@ -18,6 +18,7 @@ private:
 	Maze* maze;
 public:
     Control(Maze* maze);
+	~Control();
 	void go(Algorithm* algorithm);
 };
 

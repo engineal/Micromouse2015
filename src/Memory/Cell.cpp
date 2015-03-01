@@ -28,20 +28,3 @@ bool Cell::getWall(Direction wall) {
 		return false;
 	}
 }
-
-void Cell::setWall(Direction wall) {
-	switch (wall) {
-	case NORTH:
-		north = true;
-		break;
-	case SOUTH:
-		south = true;
-		break;
-	case EAST:
-		east = true;
-		break;
-	case WEST:
-		west = true;
-		break;
-	}
-}
