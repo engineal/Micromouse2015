@@ -8,6 +8,9 @@
 #include "io.h"
 #include <avr/io.h>
 
+/*
+ * Set the pin mode for the pin
+ */
 void pinMode(int pin, Mode mode) {
 	if (mode) {
 		DDRD |= (1 << pin);
@@ -16,9 +19,9 @@ void pinMode(int pin, Mode mode) {
 	}
 }
 
-void analogWrite(int pin, int value) {
-}
-
+/*
+ * Read an analog signal from pin
+ */
 int analogRead(int pin) {
    //Select ADC Channel ch must be 0-7
    int ch = pin & 0b00000111;
@@ -35,14 +38,26 @@ int analogRead(int pin) {
    return(ADC);
 }
 
+/*
+ * Write an analog value to the pin
+ */
+void analogWrite(int pin, int value) {
+}
+
+/*
+ * Read a digital signal from the pin
+ */
+int digitalRead(int pin){
+	return -1;
+}
+
+/*
+ * Write a digital signal to the pin
+ */
 void digitalWrite(int pin, bool value){
 	if (value) {
 		PORTD |= (1 << pin);
 	} else {
 		PORTD &= ~(1 << pin);
 	}
-}
-
-int digitalRead(int pin){
-	return -1;
 }

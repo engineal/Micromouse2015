@@ -7,6 +7,9 @@
  
 #include "Cell.h"
 
+/*
+ * Create a new cell
+ */
 Cell::Cell(bool north, bool south, bool east, bool west) {
 	this->north = north;
 	this->south = south;
@@ -14,6 +17,9 @@ Cell::Cell(bool north, bool south, bool east, bool west) {
 	this->west = west;
 }
 
+/*
+ * Get a wall in the cell
+ */
 bool Cell::getWall(Direction wall) {
 	switch (wall) {
 	case NORTH:

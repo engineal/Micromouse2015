@@ -7,10 +7,17 @@
  
 #include "Algorithm.h"
 
+/*
+ * Create a new algorithm
+ */
 Algorithm::Algorithm(Maze* maze) {
 	this->maze = maze;
 }
 
+/*
+ * Default function for nextMove
+ * Impliments a basic wall following algorithm
+ */
 Direction Algorithm::nextMove(Position* position) {
 	Cell cell = maze->getCell(position);
 	

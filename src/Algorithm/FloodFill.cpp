@@ -7,6 +7,9 @@
 
 #include "FloodFill.h"
 
+/*
+ * Impliments a floodfill algorithm
+ */
 Direction FloodFill::nextMove(Position* position) {
 	return position->getFacing();
 }

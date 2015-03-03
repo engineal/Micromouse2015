@@ -13,9 +13,8 @@
 void USART_init();
 unsigned char USART_receive();
 void USART_send(unsigned char data);
-void printlnNum(double value);
-void printNum(float value);
-void printStr(const char* StringPtr);
+void printDouble(float value);
 void printInt(int value);
+void printStr(const char* StringPtr);
 
 #endif

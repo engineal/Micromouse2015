@@ -21,7 +21,7 @@ void operator delete(void * ptr)
 }
 
 /*
- * Start
+ * Entry point
  */
 int main(int argc, char** argv) {
 	//initilize serial communication

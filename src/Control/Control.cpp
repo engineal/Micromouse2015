@@ -9,30 +9,47 @@
 #include <util/delay.h>
 #include "../Hardware/USART.h"
 
+/*
+ * Create a new control object using a maze
+ */
 Control::Control(Maze* maze) {
 	robot = new Robot();
 	this->maze = maze;
 }
 
+/*
+ * Destroy the control object, releasing control of the robot
+ */
 Control::~Control() {
 	delete robot;
 }
 
+/*
+ * Navigate to the destination position using the specified algorithm
+ */
 void Control::go(Algorithm* algorithm, Position position) {
 	printStr("Run started\n");
 	maze->printDebug();
+	
 	while (!reachedDest(position)) {
-		robot->moveCell(algorithm->nextMove(robot->getPosition()));
+		//Update the walls at the robots current position
 		maze->setCell(robot->getPosition(), robot->getCell());
+		//Move to the next position specified by the algorithm
+		robot->moveCell(algorithm->nextMove(robot->getPosition()));
+		
 		maze->printDebug();
 		// Wait 1 second
 		_delay_ms(1000);
 	}
 	robot->stop();
+	
 	printStr("Run finished\n");
 	maze->printDebug();
 }
 
+/*
+ * Check if robot has reached the destination position
+ */
 bool Control::reachedDest(Position position) {
 	bool dest = true;
 	dest &= position.getX() == robot->getPosition()->getX();
