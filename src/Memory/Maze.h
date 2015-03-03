@@ -24,6 +24,8 @@ public:
 	Maze();
     Cell getCell(Position* position);
     void setCell(Position* position, Cell cell);
+	void readEEPROM();
+	void writeEEPROM();
 	void printDebug();
 };
 

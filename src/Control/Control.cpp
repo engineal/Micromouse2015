@@ -7,6 +7,7 @@
  
 #include "Control.h"
 #include <util/delay.h>
+#include "../Hardware/USART.h"
 
 Control::Control(Maze* maze) {
 	robot = new Robot();
@@ -18,6 +19,8 @@ Control::~Control() {
 }
 
 void Control::go(Algorithm* algorithm, Position position) {
+	printStr("Run started\n");
+	maze->printDebug();
 	while (!reachedDest(position)) {
 		robot->moveCell(algorithm->nextMove(robot->getPosition()));
 		maze->setCell(robot->getPosition(), robot->getCell());
@@ -26,6 +29,8 @@ void Control::go(Algorithm* algorithm, Position position) {
 		_delay_ms(1000);
 	}
 	robot->stop();
+	printStr("Run finished\n");
+	maze->printDebug();
 }
 
 bool Control::reachedDest(Position position) {

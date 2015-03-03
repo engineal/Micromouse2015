@@ -29,7 +29,8 @@ int main(int argc, char** argv) {
 	printStr("Serial connected");
 	
 	Maze* maze = new Maze();
+	//maze->readEEPROM();
     Control* control = new Control(maze);
 	control->go(new Algorithm(maze), Position(7, 7, NORTH));
-	printStr("Run finished");
+	//maze->writeEEPROM();
 }

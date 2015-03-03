@@ -7,6 +7,7 @@
  
 #include "Maze.h"
 #include "../Hardware/USART.h"
+#include <avr/eeprom.h>
 
 Maze::Maze() {
 	for (int y = 0; y < 15; y++)
@@ -52,6 +53,32 @@ void Maze::setNSWall(int x, int y) {
 void Maze::setEWWall(int x, int y) {
 	if (y > -1 || y < 15) {
 		ewWalls[y] |= (1 << x);
+	}
+}
+
+void Maze::readEEPROM() {
+	uint8_t* address = 0;
+	for (int y = 0; y < 15; y++) {
+		nsWalls[y] = eeprom_read_byte(address++) << 8;
+		nsWalls[y] |= eeprom_read_byte(address++);
+	}
+
+	for (int y = 0; y < 16; y++) {
+		ewWalls[y] = eeprom_read_byte(address++) << 8;
+		ewWalls[y] |= eeprom_read_byte(address++);
+	}
+}
+
+void Maze::writeEEPROM() {
+	uint8_t* address = 0;
+	for (int y = 0; y < 15; y++) {
+		eeprom_write_byte(address++, (nsWalls[y] >> 8) & 0xFF);
+		eeprom_write_byte(address++, nsWalls[y] & 0xFF);
+	}
+
+	for (int y = 0; y < 16; y++) {
+		eeprom_write_byte(address++, (ewWalls[y] >> 8) & 0xFF);
+		eeprom_write_byte(address++, ewWalls[y] & 0xFF);
 	}
 }
 
