@@ -13,13 +13,18 @@
 
 class Maze {
 private:
-	bool nsWalls[16][15];
-	bool ewWalls[15][16];
+	unsigned short nsWalls[15];
+	unsigned short ewWalls[16];
+	bool isException(Position* position, Cell cell);
+	bool getNSWall(int x, int y);
+	bool getEWWall(int x, int y);
+	void setNSWall(int x, int y);
+	void setEWWall(int x, int y);
 public:
 	Maze();
     Cell getCell(Position* position);
     void setCell(Position* position, Cell cell);
+	void printDebug();
 };
 
 #endif	/* MAZE_H */
-

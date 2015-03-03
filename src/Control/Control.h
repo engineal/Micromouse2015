@@ -16,10 +16,11 @@ class Control {
 private:
 	Robot* robot;
 	Maze* maze;
+	bool reachedDest(Position position);
 public:
     Control(Maze* maze);
 	~Control();
-	void go(Algorithm* algorithm);
+	void go(Algorithm* algorithm, Position position);
 };
 
 #endif	/* CONTROL_H */

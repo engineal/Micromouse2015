@@ -8,22 +8,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Control/Control.h"
+#include "Hardware/USART.h"
 
 void * operator new(size_t size)
 {
-  return malloc(size);
+	return malloc(size);
 }
 
 void operator delete(void * ptr)
 {
-  free(ptr);
+	free(ptr);
 }
 
 /*
- * 
+ * Start
  */
 int main(int argc, char** argv) {
+	//initilize serial communication
+	USART_init();
+	printStr("Serial connected");
+	
 	Maze* maze = new Maze();
     Control* control = new Control(maze);
-	control->go(new Algorithm(maze));
+	control->go(new Algorithm(maze), Position(7, 7, NORTH));
+	printStr("Run finished");
 }
