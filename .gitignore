@@ -9,5 +9,5 @@
 *.sym
 *.d
 *.d
-Micromouse2015.pnproj
-Micromouse2015.pnps
+*.pnproj
+*.pnps
