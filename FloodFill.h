@@ -12,7 +12,10 @@
 #include "Algorithm.h"
 
 class FloodFill : public Algorithm {
+  private:
+    unsigned short distances[16][16];
   public:
+    FloodFill(Maze* maze, Position* destination);
     Direction nextMove(Position* position);
 };
 

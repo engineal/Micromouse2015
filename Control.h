@@ -20,7 +20,7 @@ class Control {
   public:
     Control(Maze* maze);
     ~Control();
-    void go(Algorithm* algorithm, Position position);
+    void go(Algorithm* algorithm);
 };
 
 #endif	/* CONTROL_H */

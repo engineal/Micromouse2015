@@ -10,8 +10,9 @@
 /*
  * Create a new algorithm
  */
-Algorithm::Algorithm(Maze* maze) {
+Algorithm::Algorithm(Maze* maze, Position* destination) {
   this->maze = maze;
+  this->destination = destination;
 }
 
 /*
@@ -34,3 +35,12 @@ Direction Algorithm::nextMove(Position* position) {
   }
 }
 
+/*
+ * Check if robot has reached the destination position
+ */
+bool Algorithm::reachedDest(Position* position) {
+  bool dest = true;
+  dest &= destination->getX() == position->getX();
+  dest &= destination->getY() == position->getY();
+  return dest;
+}

@@ -14,9 +14,11 @@
 class Algorithm {
   private:
     Maze* maze;
+    Position* destination;
   public:
-    Algorithm(Maze* maze);
+    Algorithm(Maze* maze, Position* destination);
     virtual Direction nextMove(Position* position);
+    bool reachedDest(Position* position);
 };
 
 #endif	/* ALGORITHM_H */
