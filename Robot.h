@@ -44,7 +44,6 @@ class Robot {
   public:
     Robot();
     ~Robot();
-    void initilize();
     Position* getPosition();
     void moveCell(Direction facing);
     Cell getCell();

@@ -20,7 +20,7 @@ Algorithm::Algorithm(Maze* maze, Position* destination) {
  * Impliments a basic wall following algorithm
  */
 Direction Algorithm::nextMove(Position* position) {
-  Cell cell = maze->getCell(position);
+  Cell cell = maze->getCell(position->getX(), position->getY());
 
   if (cell.getWall(position->getFacing())) {
     Direction facing = leftOf(position->getFacing());

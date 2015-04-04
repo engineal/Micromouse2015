@@ -10,20 +10,21 @@
 
 #include "Cell.h"
 #include "Position.h"
+#include <Arduino.h>
 
 class Maze {
   private:
-    unsigned short nsWalls[15];
-    unsigned short ewWalls[16];
+    unsigned int nsWalls[15];
+    unsigned int ewWalls[16];
     bool isException(Position* position, Cell cell);
-    bool getNSWall(int x, int y);
-    bool getEWWall(int x, int y);
-    void setNSWall(int x, int y);
-    void setEWWall(int x, int y);
+    bool getNSWall(byte x, byte y);
+    bool getEWWall(byte x, byte y);
+    void setNSWall(byte x, byte y);
+    void setEWWall(byte x, byte y);
   public:
     Maze();
-    Cell getCell(Position* position);
-    void setCell(Position* position, Cell cell);
+    Cell getCell(byte x, byte y);
+    void setCell(byte x, byte y, Cell cell);
     void readEEPROM();
     void writeEEPROM();
     void printDebug();

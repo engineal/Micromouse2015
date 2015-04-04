@@ -32,7 +32,7 @@ void Control::go(Algorithm* algorithm) {
 
   while (!algorithm->reachedDest(robot->getPosition())) {
     //Update the walls at the robots current position
-    maze->setCell(robot->getPosition(), robot->getCell());
+    maze->setCell(robot->getPosition()->getX(), robot->getPosition()->getY(), robot->getCell());
     //Move to the next position specified by the algorithm
     robot->moveCell(algorithm->nextMove(robot->getPosition()));
 

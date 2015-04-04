@@ -8,6 +8,8 @@
 #ifndef POSITION_H
 #define	POSITION_H
 
+#include <Arduino.h>
+
 enum Direction {
   NORTH,
   SOUTH,
@@ -17,15 +19,15 @@ enum Direction {
 
 class Position {
   private:
-    int x;
-    int y;
+    byte x;
+    byte y;
     Direction facing;
   public:
-    Position(int x, int y, Direction facing);
-    int getX();
-    void setX(int x);
-    int getY();
-    void setY(int y);
+    Position(byte x, byte y, Direction facing);
+    byte getX();
+    void setX(byte x);
+    byte getY();
+    void setY(byte y);
     Direction getFacing();
     void setFacing(Direction facing);
 };

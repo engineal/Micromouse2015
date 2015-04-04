@@ -14,7 +14,6 @@
  */
 Robot::Robot() {
   position = new Position(0, 0, EAST);
-  initilize();
 }
 
 /*
@@ -22,31 +21,6 @@ Robot::Robot() {
  */
 Robot::~Robot() {
   delete position;
-}
-
-/*
- * Set the initial states of the pins
- */
-void Robot::initilize() {
-  //Set digital pins for left and right motor to output
-  pinMode(2, INPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
-  pinMode(9, INPUT);
-  pinMode(10, INPUT);
-  pinMode(11, INPUT);
-  pinMode(12, INPUT);
-  pinMode(13, OUTPUT);
-  pinMode(A0, INPUT);
-  pinMode(A1, INPUT);
-  pinMode(A2, INPUT);
-  pinMode(A3, INPUT);
-  pinMode(A4, INPUT);
-  pinMode(A5, OUTPUT);
 }
 
 /*

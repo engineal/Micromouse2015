@@ -10,7 +10,7 @@
 /*
  * Create a new position object
  */
-Position::Position(int x, int y, Direction facing) {
+Position::Position(byte x, byte y, Direction facing) {
   this->x = x;
   this->y = y;
   this->facing = facing;
@@ -19,28 +19,28 @@ Position::Position(int x, int y, Direction facing) {
 /*
  * Get the x coordinate
  */
-int Position::getX() {
+byte Position::getX() {
   return x;
 }
 
 /*
  * Set the x coordinate
  */
-void Position::setX(int x) {
+void Position::setX(byte x) {
   this->x = x;
 }
 
 /*
  * Get the y coordinate
  */
-int Position::getY() {
+byte Position::getY() {
   return y;
 }
 
 /*
  * Set the y coordinate
  */
-void Position::setY(int y) {
+void Position::setY(byte y) {
   this->y = y;
 }
 

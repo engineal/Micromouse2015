@@ -5,6 +5,7 @@
  * Created on November 11, 2014, 11:11 AM
  */
 #include "Control.h"
+#include "Floodfill.h"
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 
@@ -13,6 +14,26 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("Serial connected");
+  
+  //Set digital pins for left and right motor to output
+  pinMode(2, INPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, INPUT);
+  pinMode(10, INPUT);
+  pinMode(11, INPUT);
+  pinMode(12, INPUT);
+  pinMode(13, OUTPUT);
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(A5, OUTPUT);
   
   mode = 0;
   digitalWrite(A5, HIGH);
@@ -32,11 +53,15 @@ void loop() {
 
   delay(500);
 
-  //Maze* maze = new Maze();
+  Maze* maze = new Maze();
+  delay(10000);
+  maze->printDebug();
   //maze->readEEPROM();
-  //Control* control = new Control(maze);
-  //Position* destination = new Position(7, 7, NORTH);
-  //control->go(new Algorithm(maze, destination));
+  Control* control = new Control(maze);
+  //control->go(new FloodFill(maze, new Position(7, 7, NORTH)));
   //maze->writeEEPROM();
+  delete control;
+  delete maze;
+  delay(10000);
 }
 
