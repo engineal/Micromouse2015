@@ -40,7 +40,6 @@ void Control::go(Algorithm* algorithm, Position position) {
     // Wait 1 second
     delay(1000);
   }
-  robot->stop();
 
   Serial.write("Run finished\n");
   maze->printDebug();
