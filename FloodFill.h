@@ -10,10 +10,12 @@
 
 #include "Position.h"
 #include "Algorithm.h"
+#include "Maze.h"
 
 class FloodFill : public Algorithm {
   private:
     unsigned short distances[16][16];
+    void cellDistance(short x, short y, short distance);
   public:
     FloodFill(Maze* maze, Position* destination);
     Direction nextMove(Position* position);

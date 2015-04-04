@@ -12,7 +12,7 @@
 #include "Maze.h"
 
 class Algorithm {
-  private:
+  protected:
     Maze* maze;
     Position* destination;
   public:
