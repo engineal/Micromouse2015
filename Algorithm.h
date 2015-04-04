@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Algorithm.h
  * Author: Aaron Lucia
  *
@@ -8,16 +8,17 @@
 #ifndef ALGORITHM_H
 #define	ALGORITHM_H
 
-#include "../Position.h"
-#include "../Memory/Maze.h"
+#include "Position.h"
+#include "Maze.h"
 
 class Algorithm {
-private:
-	Maze* maze;
-public:
-	Algorithm(Maze* maze);
-	virtual Direction nextMove(Position* position);
+  private:
+    Maze* maze;
+  public:
+    Algorithm(Maze* maze);
+    virtual Direction nextMove(Position* position);
 };
 
 #endif	/* ALGORITHM_H */
+
 

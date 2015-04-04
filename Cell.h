@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Cell.h
  * Author: Aaron Lucia
  *
@@ -8,18 +8,19 @@
 #ifndef CELL_H
 #define	CELL_H
 
-#include "../Position.h"
+#include "Position.h"
 
 class Cell {
-private:
-	bool north;
-	bool south;
-	bool east;
-	bool west;
-public:
-	Cell(bool north, bool south, bool east, bool west);
+  private:
+    bool north;
+    bool south;
+    bool east;
+    bool west;
+  public:
+    Cell(bool north, bool south, bool east, bool west);
     bool getWall(Direction wall);
 };
 
 #endif	/* CELL_H */
+
 
