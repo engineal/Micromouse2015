@@ -71,8 +71,6 @@ Direction leftOf(Direction direction) {
       return NORTH;
     case WEST:
       return SOUTH;
-    default:
-      return NORTH;
   }
 }
 
@@ -88,8 +86,6 @@ Direction rightOf(Direction direction) {
     case EAST:
       return SOUTH;
     case WEST:
-      return NORTH;
-    default:
       return NORTH;
   }
 }

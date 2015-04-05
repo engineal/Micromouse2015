@@ -6,6 +6,7 @@
  */
 #include "Control.h"
 #include "Floodfill.h"
+#include "MemoryFree.h"
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 
@@ -61,8 +62,10 @@ void loop() {
 
   Maze* maze = new Maze();
   maze->printDebug();
+  Serial.println(freeMemory());
   //maze->readEEPROM();
   Control* control = new Control(maze);
+  Serial.println(freeMemory());
   //control->go(new FloodFill(maze, new Position(7, 7, NORTH)));
   //maze->writeEEPROM();
   delete control;
