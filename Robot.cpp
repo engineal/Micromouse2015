@@ -9,6 +9,9 @@
 #include "Robot.h"
 #include <Arduino.h>
 
+volatile long leftCount;
+volatile long rightCount;
+
 /*
  * Create a new robot object
  */
@@ -39,9 +42,9 @@ int Robot::readSensor(Sensor sensor) {
   digitalWrite(8, bitRead(sensor, 2));
 
   digitalWrite(A5, HIGH);
-  delay(10);
+  delay(100);
   int value = analogRead(A0);
-  delay(10);
+  delay(100);
   digitalWrite(A5, LOW);
   return A0;
 }
@@ -52,6 +55,9 @@ int Robot::readSensor(Sensor sensor) {
 void Robot::move(int speed, int turn) {
   int leftSpeed = constrain(speed + turn, 0, 255);
   int rightSpeed = constrain(speed - turn, 0, 255);
+
+  leftCount = 0;
+  rightCount = 0;
 
   if (speed > 0) {
     analogWrite(3, leftSpeed);
@@ -69,6 +75,14 @@ void Robot::move(int speed, int turn) {
     digitalWrite(6, LOW);
     digitalWrite(13, LOW);
   }
+
+  while (leftCount < 1000)
+    delay(100);
+
+  digitalWrite(3, LOW);
+  digitalWrite(5, LOW);
+  digitalWrite(6, LOW);
+  digitalWrite(13, LOW);
 }
 
 /*
@@ -122,5 +136,13 @@ Cell Robot::getCell() {
     case WEST:
       return Cell(right, left, back, front);
   }
+}
+
+void leftTrigger() {
+  leftCount++;
+}
+
+void rightTrigger() {
+  rightCount++;
 }
 

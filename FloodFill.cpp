@@ -40,6 +40,7 @@ void FloodFill::cellDistance(byte x, byte y, byte distance) {
  */
 Direction FloodFill::nextMove(Position* position) {
   cellDistance(destination->getX(), destination->getY(), 0);
+  
   Cell cell = maze->getCell(position->getX(), position->getY());
   byte x = position->getX();
   byte y = position->getY();

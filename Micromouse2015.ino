@@ -1,5 +1,5 @@
 /*
- * File:   main.ino
+ * File:   Micromouse2015.ino
  * Author: Aaron Lucia
  *
  * Created on November 11, 2014, 11:11 AM
@@ -10,11 +10,12 @@
 #include <SoftwareSerial.h>
 
 int mode;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("Serial connected");
-  
+
   //Set digital pins for left and right motor to output
   pinMode(2, INPUT);
   pinMode(3, OUTPUT);
@@ -34,7 +35,10 @@ void setup() {
   pinMode(A3, INPUT);
   pinMode(A4, INPUT);
   pinMode(A5, OUTPUT);
-  
+
+  attachInterrupt(A1, leftTrigger, RISING);
+  attachInterrupt(A3, rightTrigger, RISING);
+
   mode = 0;
   digitalWrite(A5, HIGH);
 }
@@ -51,10 +55,11 @@ void loop() {
     mode = 0;
   }
 
-  delay(500);
+  // wait for button push
+  while (!digitalRead(2))
+    delay(100);
 
   Maze* maze = new Maze();
-  delay(10000);
   maze->printDebug();
   //maze->readEEPROM();
   Control* control = new Control(maze);

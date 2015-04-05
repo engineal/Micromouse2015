@@ -49,5 +49,8 @@ class Robot {
     Cell getCell();
 };
 
+void leftTrigger();
+void rightTrigger();
+
 #endif	/* ROBOT_H */
 
