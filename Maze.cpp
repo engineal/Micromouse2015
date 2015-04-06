@@ -22,7 +22,7 @@ Maze::Maze() {
 /*
  * Get the cell at position
  */
-Cell Maze::getCell(byte x, byte y) {
+Cell Maze::getCell(int x, int y) {
   bool north = getEWWall(x, y - 1);
   bool south = getEWWall(x, y);
   bool east = getNSWall(x, y);
@@ -33,7 +33,7 @@ Cell Maze::getCell(byte x, byte y) {
 /*
  * Update cell walls at position
  */
-void Maze::setCell(byte x, byte y, Cell cell) {
+void Maze::setCell(int x, int y, Cell cell) {
   if (cell.getWall(NORTH))
     setEWWall(x, y - 1);
   if (cell.getWall(SOUTH))
@@ -47,32 +47,46 @@ void Maze::setCell(byte x, byte y, Cell cell) {
 /*
  * Binary operations to read a wall pointing North-South at x, y
  */
-bool Maze::getNSWall(byte x, byte y) {
-  return (x < 0) || (x > 14) || (nsWalls[y] & (1 << x));
+bool Maze::getNSWall(int x, int y) {
+  if (x > -1 && x < 15 && y > -1 && y < 16)
+    return (nsWalls[y] & (1 << x));
+  return true;
 }
 
 /*
  * Binary operations to read a wall pointing East-West at x, y
  */
-bool Maze::getEWWall(byte x, byte y) {
-  return (y < 0) || (y > 14) || (ewWalls[y] & (1 << x));
+bool Maze::getEWWall(int x, int y) {
+  if (x > -1 && x < 16 && y > -1 && y < 15)
+    return (ewWalls[y] & (1 << x));
+  return true;
 }
 
 /*
  * Binary operations to write a wall pointing North-South at x, y
  */
-void Maze::setNSWall(byte x, byte y) {
-  if (x > -1 || x < 15) {
+void Maze::setNSWall(int x, int y) {
+  if (x > -1 && x < 15 && y > -1 && y < 16) {
+    Serial.print("NS: ");
+    Serial.print(x);
+    Serial.print(", ");
+    Serial.println(y);
     nsWalls[y] |= (1 << x);
+    printDebug();
   }
 }
 
 /*
  * Binary operations to write a wall pointing East-West at x, y
  */
-void Maze::setEWWall(byte x, byte y) {
-  if (y > -1 || y < 15) {
+void Maze::setEWWall(int x, int y) {
+  if (x > -1 && x < 16 && y > -1 && y < 15) {
+    Serial.print("EW: ");
+    Serial.print(x);
+    Serial.print(", ");
+    Serial.println(y);
     ewWalls[y] |= (1 << x);
+    printDebug();
   }
 }
 
@@ -112,20 +126,20 @@ void Maze::writeEEPROM() {
  * Print the maze to the serial connection
  */
 void Maze::printDebug() {
-  Serial.write(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n");
+  Serial.println(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ");
   for (byte y = 0; y < 16; y++) {
-    Serial.write("|");
+    Serial.print("|");
     for (byte x = 0; x < 16; x++) {
       if (getEWWall(x, y))
-        Serial.write("_");
+        Serial.print("_");
       else
-        Serial.write(" ");
+        Serial.print(" ");
       if (getNSWall(x, y))
-        Serial.write("|");
+        Serial.print("|");
       else
-        Serial.write(" ");
+        Serial.print(" ");
     }
-    Serial.write("\n");
+    Serial.println();
   }
 }
 

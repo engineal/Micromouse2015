@@ -49,6 +49,8 @@ Direction FloodFill::nextMove(Position* position) {
   }
   cellDistance(destination->getX(), destination->getY(), 0);
 
+  printDebug();
+
   Cell cell = maze->getCell(position->getX(), position->getY());
   byte x = position->getX();
   byte y = position->getY();
@@ -70,6 +72,22 @@ Direction FloodFill::nextMove(Position* position) {
     distance = distances[x][y - 1];
     smallestFacing = WEST;
   }
+  Serial.println(smallestFacing);
   return smallestFacing;
 }
 
+/*
+ * Print the maze to the serial connection
+ */
+void FloodFill::printDebug() {
+  for (byte y = 0; y < 16; y++) {
+    for (byte x = 0; x < 16; x++) {
+      Serial.print(" ");
+      Serial.print(distances[x][y]);
+      if (distances[x][y] < 10)
+        Serial.print(" ");
+      Serial.print(" ");
+    }
+    Serial.println();
+  }
+}

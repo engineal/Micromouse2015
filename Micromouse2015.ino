@@ -11,8 +11,6 @@
 #include <SoftwareSerial.h>
 #include <PID_v1.h>
 
-int mode;
-
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -40,37 +38,28 @@ void setup() {
 
   attachInterrupt(A1, leftTrigger, RISING);
   attachInterrupt(A3, rightTrigger, RISING);
-
-  mode = 0;
-  digitalWrite(A5, HIGH);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //int mode = (digitalRead(9) ? B1 : 0) | (digitalRead(10) ? B10 : 0) | (digitalRead(11) ? B100 : 0) | (digitalRead(12) ? B1000 : 0);
+  int mode = (digitalRead(9) ? B1 : 0) | (digitalRead(10) ? B10 : 0) | (digitalRead(11) ? B100 : 0) | (digitalRead(12) ? B1000 : 0);
   Serial.println(mode);
-  digitalWrite(4, bitRead(mode, 0));
-  digitalWrite(7, bitRead(mode, 1));
-  digitalWrite(8, bitRead(mode, 2));
-  mode++;
-  if (mode == 8) {
-    mode = 0;
-  }
+  //digitalWrite(4, bitRead(mode, 0));
+  //digitalWrite(7, bitRead(mode, 1));
+  //digitalWrite(8, bitRead(mode, 2));
 
   // wait for button push
   while (!digitalRead(2))
     delay(100);
 
   Maze* maze = new Maze();
-  maze->printDebug();
-  Serial.println(freeMemory());
   //maze->readEEPROM();
   Control* control = new Control(maze);
   Serial.println(freeMemory());
-  //control->go(new FloodFill(maze, new Position(7, 7, NORTH)));
+  control->go(new FloodFill(maze, new Position(7, 7, NORTH)));
   //maze->writeEEPROM();
   delete control;
   delete maze;
-  delay(10000);
+  delay(1000);
 }
 

@@ -6,6 +6,7 @@
  */
 
 #include "Control.h"
+#include "MemoryFree.h"
 #include <Arduino.h>
 
 /*
@@ -34,6 +35,7 @@ void Control::go(Algorithm* algorithm) {
     //Update the walls at the robots current position
     maze->setCell(robot->getPosition()->getX(), robot->getPosition()->getY(), robot->getCell());
     //Move to the next position specified by the algorithm
+    maze->printDebug();
     robot->moveCell(algorithm->nextMove(robot->getPosition()));
 
     maze->printDebug();

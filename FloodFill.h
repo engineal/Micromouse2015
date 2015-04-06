@@ -19,6 +19,7 @@ class FloodFill : public Algorithm {
   public:
     FloodFill(Maze* maze, Position* destination);
     Direction nextMove(Position* position);
+    void printDebug();
 };
 
 #endif	/* FLOODFILL_H */

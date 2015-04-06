@@ -43,9 +43,9 @@ int Robot::readSensor(Sensor sensor) {
   digitalWrite(8, bitRead(sensor, 2));
 
   digitalWrite(A5, HIGH);
-  delay(100);
+  delay(50);
   int value = analogRead(A0);
-  delay(100);
+  delay(10);
   digitalWrite(A5, LOW);
   return A0;
 }

@@ -30,8 +30,6 @@ bool Cell::getWall(Direction wall) {
       return east;
     case WEST:
       return west;
-    default:
-      return false;
   }
 }
 
