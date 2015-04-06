@@ -40,7 +40,7 @@ class Robot {
   private:
     Position* position;
     int readSensor(Sensor sensor);
-    void move(int speed, int turn);
+    void move();
   public:
     Robot();
     ~Robot();

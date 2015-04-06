@@ -9,6 +9,7 @@
 #include "MemoryFree.h"
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
+#include <PID_v1.h>
 
 int mode;
 

@@ -8,9 +8,10 @@
 
 #include "Robot.h"
 #include <Arduino.h>
+#include <PID_v1.h>
 
-volatile long leftCount;
-volatile long rightCount;
+double leftCount;
+double rightCount;
 
 /*
  * Create a new robot object
@@ -52,32 +53,34 @@ int Robot::readSensor(Sensor sensor) {
 /*
  * Motor control
  */
-void Robot::move(int speed, int turn) {
-  int leftSpeed = constrain(speed + turn, 0, 255);
-  int rightSpeed = constrain(speed - turn, 0, 255);
+void Robot::move() {
+  double leftSetPoint, rightSetPoint, leftSpeed, rightSpeed;
 
-  leftCount = 0;
-  rightCount = 0;
+  PID leftPID(&leftCount, &leftSpeed, &leftSetPoint, 2, 5, 1, DIRECT);
+  leftPID.SetMode(AUTOMATIC);
+  PID rightPID(&rightCount, &rightSpeed, &rightSetPoint, 2, 5, 1, DIRECT);
+  rightPID.SetMode(AUTOMATIC);
 
-  if (speed > 0) {
-    analogWrite(3, leftSpeed);
-    digitalWrite(5, LOW);
-    analogWrite(6, rightSpeed);
-    digitalWrite(13, LOW);
-  } else if (speed < 0) {
-    digitalWrite(3, LOW);
-    analogWrite(5, leftSpeed);
-    digitalWrite(6, LOW);
-    analogWrite(13, rightSpeed);
-  } else {
-    digitalWrite(3, LOW);
-    digitalWrite(5, LOW);
-    digitalWrite(6, LOW);
-    digitalWrite(13, LOW);
+  while (leftCount < 1000) {
+    leftPID.Compute();
+    rightPID.Compute();
+
+    if (leftSpeed > 0) {
+      analogWrite(3, leftSpeed);
+      digitalWrite(5, LOW);
+    } else {
+      digitalWrite(3, LOW);
+      analogWrite(5, -leftSpeed);
+    }
+
+    if (rightSpeed > 0) {
+      analogWrite(6, rightSpeed);
+      digitalWrite(13, LOW);
+    } else {
+      digitalWrite(6, LOW);
+      analogWrite(13, -rightSpeed);
+    }
   }
-
-  while (leftCount < 1000)
-    delay(100);
 
   digitalWrite(3, LOW);
   digitalWrite(5, LOW);
@@ -90,13 +93,13 @@ void Robot::move(int speed, int turn) {
  */
 void Robot::moveCell(Direction facing) {
   if (facing == position->getFacing()) {
-    move(100, 0);
+    move();
   } else if (facing == leftOf(position->getFacing())) {
-    move(100, -90);
+    move();
   } else if (facing == rightOf(position->getFacing())) {
-    move(100, 90);
+    move();
   } else {
-    move(-100, 180);
+    move();
   }
 
   switch (facing) {
