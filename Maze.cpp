@@ -12,10 +12,10 @@
  * Create a new maze with no walls
  */
 Maze::Maze() {
-  for (byte y = 0; y < 15; y++)
+  for (int y = 0; y < 16; y++)
     nsWalls[y] = 0;
 
-  for (byte y = 0; y < 16; y++)
+  for (int y = 0; y < 15; y++)
     ewWalls[y] = 0;
 }
 
@@ -67,12 +67,7 @@ bool Maze::getEWWall(int x, int y) {
  */
 void Maze::setNSWall(int x, int y) {
   if (x > -1 && x < 15 && y > -1 && y < 16) {
-    Serial.print("NS: ");
-    Serial.print(x);
-    Serial.print(", ");
-    Serial.println(y);
     nsWalls[y] |= (1 << x);
-    printDebug();
   }
 }
 
@@ -81,12 +76,7 @@ void Maze::setNSWall(int x, int y) {
  */
 void Maze::setEWWall(int x, int y) {
   if (x > -1 && x < 16 && y > -1 && y < 15) {
-    Serial.print("EW: ");
-    Serial.print(x);
-    Serial.print(", ");
-    Serial.println(y);
     ewWalls[y] |= (1 << x);
-    printDebug();
   }
 }
 
@@ -95,12 +85,12 @@ void Maze::setEWWall(int x, int y) {
  */
 void Maze::readEEPROM() {
   int address = 0;
-  for (byte y = 0; y < 15; y++) {
+  for (int y = 0; y < 15; y++) {
     nsWalls[y] = EEPROM.read(address++) << 8;
     nsWalls[y] |= EEPROM.read(address++);
   }
 
-  for (byte y = 0; y < 16; y++) {
+  for (int y = 0; y < 16; y++) {
     ewWalls[y] = EEPROM.read(address++) << 8;
     ewWalls[y] |= EEPROM.read(address++);
   }
@@ -111,15 +101,53 @@ void Maze::readEEPROM() {
  */
 void Maze::writeEEPROM() {
   int address = 0;
-  for (byte y = 0; y < 15; y++) {
+  for (int y = 0; y < 15; y++) {
     EEPROM.update(address++, (nsWalls[y] >> 8) & 0xFF);
     EEPROM.update(address++, nsWalls[y] & 0xFF);
   }
 
-  for (byte y = 0; y < 16; y++) {
+  for (int y = 0; y < 16; y++) {
     EEPROM.update(address++, (ewWalls[y] >> 8) & 0xFF);
     EEPROM.update(address++, ewWalls[y] & 0xFF);
   }
+}
+
+/*
+ * Generate a fake maze for testing
+ */
+void Maze::makeFake() {
+  nsWalls[0] = 0b0;
+  nsWalls[1] = 0b100000000000000;
+  nsWalls[2] = 0b100000000000001;
+  nsWalls[3] = 0b100000000000001;
+  nsWalls[4] = 0b100000000000001;
+  nsWalls[5] = 0b100000000000001;
+  nsWalls[6] = 0b100000000000001;
+  nsWalls[7] = 0b100000000000001;
+  nsWalls[8] = 0b100000000000001;
+  nsWalls[9] = 0b100000000000001;
+  nsWalls[10] = 0b100000000000001;
+  nsWalls[11] = 0b100000000000001;
+  nsWalls[12] = 0b100000000000001;
+  nsWalls[13] = 0b100000000000001;
+  nsWalls[14] = 0b100000000000001;
+  nsWalls[15] = 0b0;
+
+  ewWalls[0] = 0b0111111111111111;
+  ewWalls[1] = 0b0;
+  ewWalls[2] = 0b0;
+  ewWalls[3] = 0b0;
+  ewWalls[4] = 0b0;
+  ewWalls[5] = 0b0;
+  ewWalls[6] = 0b0;
+  ewWalls[7] = 0b0;
+  ewWalls[8] = 0b0;
+  ewWalls[9] = 0b0;
+  ewWalls[10] = 0b0;
+  ewWalls[11] = 0b0;
+  ewWalls[12] = 0b0;
+  ewWalls[13] = 0b0;
+  ewWalls[14] = 0b0111111111111110;
 }
 
 /*
@@ -127,9 +155,9 @@ void Maze::writeEEPROM() {
  */
 void Maze::printDebug() {
   Serial.println(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ");
-  for (byte y = 0; y < 16; y++) {
+  for (int y = 0; y < 16; y++) {
     Serial.print("|");
-    for (byte x = 0; x < 16; x++) {
+    for (int x = 0; x < 16; x++) {
       if (getEWWall(x, y))
         Serial.print("_");
       else
@@ -141,5 +169,6 @@ void Maze::printDebug() {
     }
     Serial.println();
   }
+  Serial.println();
 }
 

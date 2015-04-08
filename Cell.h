@@ -23,4 +23,3 @@ class Cell {
 
 #endif	/* CELL_H */
 
-

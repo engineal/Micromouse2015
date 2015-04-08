@@ -19,15 +19,16 @@ enum Direction {
 
 class Position {
   private:
-    byte x;
-    byte y;
+    int x;
+    int y;
     Direction facing;
   public:
-    Position(byte x, byte y, Direction facing);
-    byte getX();
-    void setX(byte x);
-    byte getY();
-    void setY(byte y);
+    Position(int x, int y);
+    Position(int x, int y, Direction facing);
+    int getX();
+    void setX(int x);
+    int getY();
+    void setY(int y);
     Direction getFacing();
     void setFacing(Direction facing);
 };

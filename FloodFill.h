@@ -14,8 +14,8 @@
 
 class FloodFill : public Algorithm {
   private:
-    byte distances[16][16];
-    void cellDistance(byte x, byte y, byte distance);
+    unsigned int distances[16][16];
+    void cellDistance(Position* destination);
   public:
     FloodFill(Maze* maze, Position* destination);
     Direction nextMove(Position* position);

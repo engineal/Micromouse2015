@@ -23,4 +23,3 @@ class Algorithm {
 
 #endif	/* ALGORITHM_H */
 
-

@@ -124,10 +124,10 @@ void Robot::moveCell(Direction facing) {
  * Read sensors and interpret as walls
  */
 Cell Robot::getCell() {
-  bool front = (readSensor(frontL) + readSensor(frontR)) < 1000;
-  bool back = (readSensor(backL) + readSensor(backR)) < 1000;
-  bool left = (readSensor(leftF) + readSensor(leftB)) < 1000;
-  bool right = (readSensor(rightF) + readSensor(rightB)) < 1000;
+  bool front = (readSensor(frontL) + readSensor(frontR)) > 100;
+  bool back = false;
+  bool left = readSensor(leftF) > 50;
+  bool right = readSensor(rightF) > 50;
 
   switch (position->getFacing()) {
     case NORTH:

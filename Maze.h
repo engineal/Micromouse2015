@@ -27,6 +27,7 @@ class Maze {
     void setCell(int x, int y, Cell cell);
     void readEEPROM();
     void writeEEPROM();
+    void makeFake();
     void printDebug();
 };
 
