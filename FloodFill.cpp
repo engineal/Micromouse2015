@@ -30,33 +30,36 @@ void FloodFill::cellDistance(Position* destination) {
     }
   }
 
-  Position* stack1[150];
+  int stack1[150];
   int stack1Size = 0;
-  Position* stack2[150];
+  int stack2[150];
   int stack2Size = 0;
 
+  Serial.println(freeMemory());
+
   int distance = 0;
-  stack1[stack1Size++] = destination;
+  stack1[stack1Size++] = (destination->getX() << 8) | (destination->getY() & 0xff);
 
   while (stack1Size > 0) {
     while (stack1Size > 0) {
-      Position* pos = stack1[--stack1Size];
+      Serial.println(freeMemory());
+      stack1Size--;
+      int x = stack1[stack1Size] >> 8;
+      int y = stack1[stack1Size] & 0xff;
 
-      if (distances[pos->getX()][pos->getY()] > distance) {
-        distances[pos->getX()][pos->getY()] = distance;
+      if (distances[x][y] > distance) {
+        distances[x][y] = distance;
 
-        Cell cell = maze->getCell(pos->getX(), pos->getY());
+        Cell cell = maze->getCell(x, y);
         if (!cell.getWall(NORTH))
-          stack2[stack2Size++] = new Position(pos->getX(), pos->getY() - 1);
+          stack2[stack2Size++] = (x << 8) | ((y - 1) & 0xff);
         if (!cell.getWall(SOUTH))
-          stack2[stack2Size++] = new Position(pos->getX(), pos->getY() + 1);
+          stack2[stack2Size++] = (x << 8) | ((y + 1) & 0xff);
         if (!cell.getWall(EAST))
-          stack2[stack2Size++] = new Position(pos->getX() + 1, pos->getY());
+          stack2[stack2Size++] = ((x + 1) << 8) | (y & 0xff);
         if (!cell.getWall(WEST))
-          stack2[stack2Size++] = new Position(pos->getX() - 1, pos->getY());
+          stack2[stack2Size++] = ((x - 1) << 8) | (y & 0xff);
       }
-
-      delete pos;
     }
     distance++;
 
@@ -72,6 +75,7 @@ void FloodFill::cellDistance(Position* destination) {
  * At current position, get the robot's facing and find distance values of adjacent squares
  */
 Direction FloodFill::nextMove(Position* position) {
+  Serial.println(freeMemory());
   cellDistance(destination);
 
   printDebug();
@@ -97,7 +101,8 @@ Direction FloodFill::nextMove(Position* position) {
     distance = distances[x][y - 1];
     smallestFacing = WEST;
   }
-  Serial.println(smallestFacing);
+
+  Serial.println(freeMemory());
   return smallestFacing;
 }
 

@@ -118,23 +118,23 @@ void Maze::writeEEPROM() {
 void Maze::makeFake() {
   nsWalls[0] = 0b0;
   nsWalls[1] = 0b100000000000000;
-  nsWalls[2] = 0b100000000000001;
-  nsWalls[3] = 0b100000000000001;
-  nsWalls[4] = 0b100000000000001;
-  nsWalls[5] = 0b100000000000001;
-  nsWalls[6] = 0b100000000000001;
-  nsWalls[7] = 0b100000000000001;
-  nsWalls[8] = 0b100000000000001;
-  nsWalls[9] = 0b100000000000001;
-  nsWalls[10] = 0b100000000000001;
-  nsWalls[11] = 0b100000000000001;
-  nsWalls[12] = 0b100000000000001;
-  nsWalls[13] = 0b100000000000001;
+  nsWalls[2] = 0b110000000000001;
+  nsWalls[3] = 0b110000000000011;
+  nsWalls[4] = 0b110000000000011;
+  nsWalls[5] = 0b110000000000011;
+  nsWalls[6] = 0b110000000000011;
+  nsWalls[7] = 0b110000000000011;
+  nsWalls[8] = 0b110000000000011;
+  nsWalls[9] = 0b110000000000011;
+  nsWalls[10] = 0b110000000000011;
+  nsWalls[11] = 0b110000000000011;
+  nsWalls[12] = 0b110000000000011;
+  nsWalls[13] = 0b110000000000011;
   nsWalls[14] = 0b100000000000001;
   nsWalls[15] = 0b0;
 
-  ewWalls[0] = 0b0111111111111111;
-  ewWalls[1] = 0b0;
+  ewWalls[0] = 0b0111111111111110;
+  ewWalls[1] = 0b0011111111111110;
   ewWalls[2] = 0b0;
   ewWalls[3] = 0b0;
   ewWalls[4] = 0b0;
@@ -146,7 +146,7 @@ void Maze::makeFake() {
   ewWalls[10] = 0b0;
   ewWalls[11] = 0b0;
   ewWalls[12] = 0b0;
-  ewWalls[13] = 0b0;
+  ewWalls[13] = 0b0011111111111100;
   ewWalls[14] = 0b0111111111111110;
 }
 
