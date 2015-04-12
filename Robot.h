@@ -11,13 +11,13 @@
 #include "Position.h"
 #include "Cell.h"
 
-//Left motor: 3, 5
-//Right motor: 6, 13
+//Left motor: A1, A2
+//Right motor: A3, A4
 //Sensor select: 4, 7, 8
 //Sensor read: A0
 //Sensor emit: A5
-//Left motor encoder: A1, A2
-//Right motor encoder: A3, A4
+//Left motor encoder: 6, 13
+//Right motor encoder: 3, 5
 //Switch: 9, 10, 11, 12
 //Button: 2
 enum Sensor {
@@ -41,6 +41,7 @@ class Robot {
     Position* position;
     int readSensor(Sensor sensor);
     void move();
+    void turn(int degrees);
   public:
     Robot();
     ~Robot();

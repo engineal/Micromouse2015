@@ -35,14 +35,11 @@ void FloodFill::cellDistance(Position* destination) {
   int stack2[150];
   int stack2Size = 0;
 
-  Serial.println(freeMemory());
-
   int distance = 0;
   stack1[stack1Size++] = (destination->getX() << 8) | (destination->getY() & 0xff);
 
   while (stack1Size > 0) {
     while (stack1Size > 0) {
-      Serial.println(freeMemory());
       stack1Size--;
       int x = stack1[stack1Size] >> 8;
       int y = stack1[stack1Size] & 0xff;
@@ -86,23 +83,22 @@ Direction FloodFill::nextMove(Position* position) {
   int distance = 1000;
   Direction smallestFacing = NORTH;
   if (!cell.getWall(NORTH) && distances[x][y - 1] < distance) {
-    distance = distances[x - 1][y];
+    distance = distances[x][y - 1];
     smallestFacing = NORTH;
   }
   if (!cell.getWall(SOUTH) && distances[x][y + 1] < distance) {
-    distance = distances[x + 1][y];
+    distance = distances[x][y + 1];
     smallestFacing = SOUTH;
   }
   if (!cell.getWall(EAST) && distances[x + 1][y] < distance) {
-    distance = distances[x][y + 1];
+    distance = distances[x + 1][y];
     smallestFacing = EAST;
   }
   if (!cell.getWall(WEST) && distances[x - 1][y] < distance) {
-    distance = distances[x][y - 1];
+    distance = distances[x - 1][y];
     smallestFacing = WEST;
   }
-
-  Serial.println(freeMemory());
+  
   return smallestFacing;
 }
 

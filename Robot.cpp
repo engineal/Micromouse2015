@@ -10,9 +10,6 @@
 #include <Arduino.h>
 #include <PID_v1.h>
 
-double leftCount;
-double rightCount;
-
 /*
  * Create a new robot object
  */
@@ -42,63 +39,141 @@ int Robot::readSensor(Sensor sensor) {
   digitalWrite(7, bitRead(sensor, 1));
   digitalWrite(8, bitRead(sensor, 2));
 
+  int values[5];
+
   digitalWrite(A5, HIGH);
   delay(50);
-  int value = analogRead(A0);
-  delay(10);
+  values[0] = analogRead(A0);
+  values[1] = analogRead(A0);
+  values[2] = analogRead(A0);
+  values[3] = analogRead(A0);
+  values[4] = analogRead(A0);
+
+  int least = values[0];
+  for (int i = 1; i < 5; i++) {
+    if (values[i] < least) {
+      least = values[i];
+    }
+  }
   digitalWrite(A5, LOW);
-  return A0;
+  return least;
 }
 
 /*
  * Motor control
  */
 void Robot::move() {
-  double leftSetPoint, rightSetPoint, leftSpeed, rightSpeed;
+  int leftCount = 0;
+  int rightCount = 0;
+  Serial.println("Moving");
+  //double leftSetPoint, rightSetPoint, leftSpeed, rightSpeed;
 
-  PID leftPID(&leftCount, &leftSpeed, &leftSetPoint, 2, 5, 1, DIRECT);
-  leftPID.SetMode(AUTOMATIC);
-  PID rightPID(&rightCount, &rightSpeed, &rightSetPoint, 2, 5, 1, DIRECT);
-  rightPID.SetMode(AUTOMATIC);
+  //PID leftPID(&leftCount, &leftSpeed, &leftSetPoint, 2, 5, 1, DIRECT);
+  //leftPID.SetMode(AUTOMATIC);
+  //PID rightPID(&rightCount, &rightSpeed, &rightSetPoint, 2, 5, 1, DIRECT);
+  //rightPID.SetMode(AUTOMATIC);
 
-  while (leftCount < 1000) {
-    leftPID.Compute();
-    rightPID.Compute();
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, HIGH);
 
-    if (leftSpeed > 0) {
-      analogWrite(3, leftSpeed);
-      digitalWrite(5, LOW);
-    } else {
-      digitalWrite(3, LOW);
-      analogWrite(5, -leftSpeed);
+  digitalWrite(A3, HIGH);
+  digitalWrite(A4, LOW);
+
+  while (leftCount < 100) {
+    //leftPID.Compute();
+    //rightPID.Compute();
+
+    /*if (readSensor(leftF) - readSensor(rightF) > 5) {
+      Serial.println("Fix right");
+      digitalWrite(A2, LOW);
+      delay(50);
+      digitalWrite(A2, HIGH);
     }
+    if (readSensor(leftF) - readSensor(rightF) < -5) {
+      Serial.println("Fix left");
+      digitalWrite(A3, LOW);
+      delay(50);
+      digitalWrite(A3, HIGH);
+    }*/
 
-    if (rightSpeed > 0) {
-      analogWrite(6, rightSpeed);
-      digitalWrite(13, LOW);
-    } else {
-      digitalWrite(6, LOW);
-      analogWrite(13, -rightSpeed);
+    digitalWrite(A2, LOW);
+    digitalWrite(A3, LOW);
+    delay(5);
+    digitalWrite(A3, HIGH);
+    digitalWrite(A2, HIGH);
+
+    delay(5);
+    leftCount++;
+  }
+
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+}
+
+/*
+ * Motor control
+ */
+void Robot::turn(int degrees) {
+  int leftCount = 0;
+  int rightCount = 0;
+  Serial.println("Turning");
+
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, LOW);
+
+  if (degrees > 0) {
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, HIGH);
+    while (leftCount < degrees) {
+      digitalWrite(A2, LOW);
+      delay(5);
+      digitalWrite(A2, HIGH);
+      delay(10);
+      leftCount++;
+    }
+  } else if (degrees < 0) {
+    digitalWrite(A3, HIGH);
+    digitalWrite(A4, LOW);
+    while (rightCount < -degrees) {
+      digitalWrite(A3, LOW);
+      delay(5);
+      digitalWrite(A3, HIGH);
+      delay(10);
+      rightCount++;
     }
   }
 
-  digitalWrite(3, LOW);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
-  digitalWrite(13, LOW);
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, LOW);
 }
 
 /*
  * Move to the next cell in the direction
  */
 void Robot::moveCell(Direction facing) {
+  Serial.print(position->getX());
+  Serial.print(", ");
+  Serial.print(position->getY());
+  Serial.print(", ");
+  Serial.print(position->getFacing());
+  Serial.print(", ");
   if (facing == position->getFacing()) {
     move();
   } else if (facing == leftOf(position->getFacing())) {
+    Serial.println("Left");
+    turn(-90);
     move();
   } else if (facing == rightOf(position->getFacing())) {
+    Serial.println("Right");
+    turn(90);
     move();
   } else {
+    Serial.println("Reverse");
+    turn(180);
     move();
   }
 
@@ -110,10 +185,10 @@ void Robot::moveCell(Direction facing) {
       position->setY(position->getY() + 1);
       break;
     case EAST:
-      position->setX(position->getX() - 1);
+      position->setX(position->getX() + 1);
       break;
     case WEST:
-      position->setX(position->getX() + 1);
+      position->setX(position->getX() - 1);
       break;
   }
 
@@ -126,8 +201,8 @@ void Robot::moveCell(Direction facing) {
 Cell Robot::getCell() {
   bool front = (readSensor(frontL) + readSensor(frontR)) > 100;
   bool back = false;
-  bool left = readSensor(leftF) > 50;
-  bool right = readSensor(rightF) > 50;
+  bool left = readSensor(leftF) > 0;
+  bool right = readSensor(rightF) > 0;
 
   switch (position->getFacing()) {
     case NORTH:
@@ -139,13 +214,5 @@ Cell Robot::getCell() {
     case WEST:
       return Cell(right, left, back, front);
   }
-}
-
-void leftTrigger() {
-  leftCount++;
-}
-
-void rightTrigger() {
-  rightCount++;
 }
 
